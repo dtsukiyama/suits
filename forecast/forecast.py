@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from fbprophet import Prophet
+from helper import processForecast
 
 import spacy
 nlp = spacy.load('en')
@@ -45,13 +46,7 @@ def forecastData(name, periods):
     forecast = m.predict(future)
     forecast = forecast.rename(columns={'yhat':'prediction','yhat_lower':'prediction_lower_bound',
                                         'yhat_upper':'prediction_upper_bound'})
-    forecast['date'] = forecast['ds'].dt.strftime('%Y-%m-%d')
-    dates = [str(b) for b in forecast['date']]
-    predictions = [b for b in forecast['prediction']]
-    lower = [b for b in forecast['prediction_lower_bound']]
-    upper = [b for b in forecast['prediction_upper_bound']]
-    monthly_forecast =[['month','prediction', 'prediction lower bound','prediction upper bound']]
-    monthly_forecast = monthly_forecast + [list(a) for a in zip(dates, predictions, lower, upper)]
+    monthly_forecast = processForecast(forecast)
     forecast_table = forecast[['date','prediction', 'prediction_lower_bound',
                                'prediction_upper_bound']].sort_values('date', ascending=False).round().to_html()
     forecast[['date','prediction', 'prediction_lower_bound',
