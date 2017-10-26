@@ -1,0 +1,118 @@
+<html>
+   <head>
+      <title>Forecast</title>
+      <meta name = "viewport" content = "width = device-width, initial-scale = 1">      
+      <link rel = "stylesheet"
+         href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+      <link rel = "stylesheet"
+         href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+      <script type = "text/javascript"
+         src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js">
+      </script> 
+      
+      <script>
+         $(document).ready(function() {
+            $('select').material_select();
+         });
+      </script>
+       
+      <script>
+        $(document).ready(function() {
+        $('select').material_select();
+
+        // for HTML5 "required" attribute
+        $("select[required]").css({
+          display: "inline",
+          height: 0,
+          padding: 0,
+          width: 0
+        });
+      });
+      </script>
+   
+   </head>
+   <body>
+   <nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Forecast</a>
+      <ul class="right hide-on-med-and-down">
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+   
+      <div class="container">
+        &nbsp;&nbsp; 
+        <p class="flow-text">To create a forecast all you need is a set of data of the thing you want to predict and a timestamp. 
+                             The example given below is champagne sales by month.</p>
+         
+          <table>
+            <thead>
+              <tr>
+                  <th>Month</th>
+                  <th>Champagne Sales</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>1964-01-01</td>
+                <td>2815</td>
+              </tr>
+              <tr>
+                <td>1964-02-01</td>
+                <td>2672</td>
+              </tr>
+              <tr>
+                <td>1964-03-01</td>
+                <td>2755</td>
+              </tr>
+            </tbody>
+          </table>
+             
+          
+      </div>
+       
+      <div class="container">
+        &nbsp;&nbsp; 
+       </div>
+         
+   <div class="container"> 
+      <div class = "row">
+         
+            <div class = "row">
+              <label>Select File to Forecast</label>
+              <form required method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
+                <div class="file-field input-field">
+                  <div class="waves-effect waves-light btn-large light-blue lighten-1">
+                    <span>File</span>
+                    <input type="file" name="data">
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                  </div>
+                    
+                 <button class="waves-effect waves-light btn-large light-blue lighten-1" type="submit" value='submit'>Submit
+                  <i class="material-icons right">send</i>
+                 </button>  
+                    
+                    
+                </div>
+               </form>
+                
+             </div>
+          
+
+      </div>
+     </div>
+       
+       <div class="container"> 
+        {% block body %}
+        {% endblock %}
+       </div>
+       
+   </body>   
+</html>

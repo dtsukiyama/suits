@@ -1,0 +1,92 @@
+<html>
+   <head>
+      <title>Forecast</title>
+      <meta name = "viewport" content = "width = device-width, initial-scale = 1">      
+      <link rel = "stylesheet"
+         href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+      <link rel = "stylesheet"
+         href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+      <script type = "text/javascript"
+         src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js">
+      </script> 
+      
+      <script>
+         $(document).ready(function() {
+            $('select').material_select();
+         });
+      </script>
+       
+      <script>
+        $(document).ready(function() {
+        $('select').material_select();
+
+        // for HTML5 "required" attribute
+        $("select[required]").css({
+          display: "inline",
+          height: 0,
+          padding: 0,
+          width: 0
+        });
+      });
+      </script>
+   
+   </head>
+   <body>
+   <nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Forecast</a>
+      <ul class="right hide-on-med-and-down">
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+   
+      <div class="container">
+        &nbsp;&nbsp; 
+      </div>
+    
+   <div class="container"> 
+       
+
+       
+      <div class = "row">
+         <form action="{{ url_for('modelForecast') }}" method='post' class = "col s10">
+             
+        <div class = "row">
+           <p class="flow-text">Verify data</p>
+
+              <select required name='data-verification'>
+                  <option value="" disabled selected>Choose your data</option>
+                  {% for o in menu %}
+                  <option value="{{ o }}" SELECTED>{{ o }}</option>
+                  {% endfor %}
+              </select>
+              <label>Select data for Forecasting</label>
+
+
+           </div> 
+
+            <div class = "row">
+                <p class="flow-text">How far into the future do you want to predict?</p>
+                <div class="input-field col s12 m4">
+                    <input type="number" name="Number" value="this is not number" class="validate" required="" aria-required="true"/>
+                    <label for="Number">Number of Periods</label>
+                    
+                 <button class="waves-effect waves-light btn-large light-blue lighten-1" type="submit" value='submit'>Forecast
+                  <i class="material-icons right">send</i>
+                 </button>
+                    
+                </div>   
+
+            </div>
+               
+             
+
+         </form>       
+      </div>
+     </div>
+   </body>   
+</html>
