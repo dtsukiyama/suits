@@ -1,0 +1,41 @@
+{% extends "search.html" %}
+{% block body %}
+
+   
+      <div class="container">
+        &nbsp;&nbsp; 
+      </div>
+        
+
+  {% if results%}
+  <div>
+
+    <!-- Search Results -->
+    <div class="row">
+      <table class="highlight">
+
+        <thead>
+          <tr>
+            {% for col in columns %}
+             <th>{{ col }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for doc in results %}
+          <tr>
+            {% for b in doc %}
+            <td>{{b}}</td>
+            {% endfor %}
+          </tr>
+         {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+
+  </div>
+
+{% endblock %}
