@@ -1,0 +1,11 @@
+elasticsearch==5.4.0
+Flask==0.12.2
+Flask-Uploads==0.2.1
+jupyter==1.0.0
+jupyter-client==5.1.0
+jupyter-console==5.2.0
+jupyter-core==4.3.0
+numpy==1.13.3
+pandas==0.20.3
+requests==2.18.4
+spacy==1.9.0

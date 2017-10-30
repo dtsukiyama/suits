@@ -1,0 +1,83 @@
+<html>
+   <head>
+      <title>Search</title>
+      <meta name = "viewport" content = "width = device-width, initial-scale = 1">      
+      <link rel = "stylesheet"
+         href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+      <link rel = "stylesheet"
+         href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+      <script type = "text/javascript"
+         src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js">
+      </script> 
+      
+      <script>
+         $(document).ready(function() {
+            $('select').material_select();
+         });
+      </script>
+       
+      <script>
+        $(document).ready(function() {
+        $('select').material_select();
+
+        // for HTML5 "required" attribute
+        $("select[required]").css({
+          display: "inline",
+          height: 0,
+          padding: 0,
+          width: 0
+        });
+      });
+      </script>
+   
+   </head>
+   <body>
+   <nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Search</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="{{ url_for('main_page') }}">Upload New Data</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+   
+      <div class="container">
+        &nbsp;&nbsp; 
+      </div>
+    
+   <div class="container"> 
+       
+      <form action="{{ url_for('search') }}" method='POST' class = "col s10">
+          <label>Select Index</label>
+          <div class = "input-field col s12">
+              <select required name='data-index'>
+                  <option value="" disabled selected>Choose your Index</option>
+                  {% for o in menu %}
+                  <option value="{{ o }}" SELECTED>{{ o }}</option>
+                  {% endfor %}
+              </select>
+           </div>  
+          
+          
+          
+        <div class="input-field">
+          <label>Search</label>
+          <input id = "field" name="query" type="search">
+          <input id="submit" name="field" type="submit" style="visibility: hidden;" />
+          <label class="label-icon" for="search"></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+      
+   <div class="row">
+      {% block body %}
+      {% endblock %}
+  </div>
+      
+   </div>
+   </body>   
+</html>
