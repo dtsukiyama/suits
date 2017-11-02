@@ -5,7 +5,7 @@
 Suits is derived from Mobile Suit Gundam. Yes, giant robots. I wanted to wrap machine learning projects in easy to use applications for non-experts. 
 Suits Named Entity Recognition attempts to wrap a very simple Flask named entity recognition model training.
 
-Built on top of (spaCy)[https://spacy.io/] and (Elasticsearch)[https://www.elastic.co/products/elasticsearch]
+Built on top of [spaCy](https://spacy.io/) and [Elasticsearch](https://www.elastic.co/products/elasticsearch)
 
 ### Requirements and Setup
 
