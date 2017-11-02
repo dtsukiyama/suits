@@ -1,0 +1,110 @@
+<html>
+   <head>
+      <title>NER</title>
+      <meta name = "viewport" content = "width = device-width, initial-scale = 1">      
+      <link rel = "stylesheet"
+         href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+      <link rel = "stylesheet"
+         href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+      <script type = "text/javascript"
+         src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js">
+      </script> 
+      
+      <script>
+         $(document).ready(function() {
+            $('select').material_select();
+         });
+      </script>
+       
+      <script>
+        $(document).ready(function() {
+        $('select').material_select();
+
+        // for HTML5 "required" attribute
+        $("select[required]").css({
+          display: "inline",
+          height: 0,
+          padding: 0,
+          width: 0
+        });
+      });
+      </script>
+   
+   </head>
+   <body>
+   <nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Named Entity Recognition</a>
+      <ul class="right hide-on-med-and-down">
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+   
+      <div class="container">
+        &nbsp;&nbsp; 
+        <p class="flow-text">Train a Named Entity Recognizer with your own data</p>
+          <p>For example we have questions from Cross Validated Stack Exchange and we want to train a NER on statistics and machine learning terms; we can upload this data.</p>
+         
+          <table>
+            <thead>
+              <tr>
+                  <th>Title</th>
+                  <th>Body</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>The Two Cultures: statistics vs. machine learning?</td>
+                <td><p>Last year, I read a blog post from <a href="http://anyall.org/">Brendan O'Connor</a> entitled <a href="http://anyall.org/blog/2008/12/statistics-vs-machine-learning-fight/">"Statistics vs. Machine Learning, fight!"</a> that discussed some of the differences between the two fields.  <a href="http://andrewgelman.com/2008/12/machine_learnin/">Andrew Gelman responded favorably to this</a>:</p><p>Simon Blomberg: </p><blockquote>  <p>From R's fortunes  package: To paraphrase provocatively,  'machine learning is statistics minus  any checking of models and  assumptions'.  -- Brian D. Ripley (about the difference between machine learning  and statistics) useR! 2004, Vienna  (May 2004) :-) Season's Greetings!</p></blockquote><p>Andrew Gelman:</p><blockquote>  <p>In that case, maybe we should get rid  of checking of models and assumptions  more often. Then maybe we'd be able to  solve some of the problems that the  machine learning people can solve but  we can't!</p></blockquote><p>There was also the <a href="http://projecteuclid.org/euclid.ss/1009213726"><strong>"Statistical Modeling: The Two Cultures"</strong> paper</a> by Leo Breiman in 2001 which argued that statisticians rely too heavily on data modeling, and that machine learning techniques are making progress by instead relying on the <em>predictive accuracy</em> of models.</p><p>Has the statistics field changed over the last decade in response to these critiques?  Do the <em>two cultures</em> still exist or has statistics grown to embrace machine learning techniques such as neural networks and support vector machines?</p></td>
+              </tr>
+            </tbody>
+          </table>
+             
+          
+      </div>
+       
+      <div class="container">
+        &nbsp;&nbsp; 
+       </div>
+         
+   <div class="container"> 
+      <div class = "row">
+         
+            <div class = "row">
+              <label>Select File to Index</label>
+              <form required method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
+                <div class="file-field input-field">
+                  <div class="waves-effect waves-light btn-large light-blue lighten-1">
+                    <span>File</span>
+                    <input type="file" name="data">
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                  </div>
+                    
+                 <button class="waves-effect waves-light btn-large light-blue lighten-1" type="submit" value='submit'>Submit
+                  <i class="material-icons right">send</i>
+                 </button>  
+                    
+                    
+                </div>
+               </form>
+                
+             </div>
+          
+
+      </div>
+     </div>
+       
+       <div class="container"> 
+        {% block body %}
+        {% endblock %}
+       </div>
+       
+   </body>   
+</html>

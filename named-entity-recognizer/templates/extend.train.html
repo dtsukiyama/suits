@@ -1,0 +1,138 @@
+<html>
+   <head>
+      <title>NER</title>
+      <meta name = "viewport" content = "width = device-width, initial-scale = 1">      
+      <link rel = "stylesheet"
+         href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+      <link rel = "stylesheet"
+         href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+      <script type = "text/javascript"
+         src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js">
+      </script> 
+      
+      <script>
+         $(document).ready(function() {
+            $('select').material_select();
+         });
+      </script>
+       
+      <script>
+        $(document).ready(function() {
+        $('select').material_select();
+
+        // for HTML5 "required" attribute
+        $("select[required]").css({
+          display: "inline",
+          height: 0,
+          padding: 0,
+          width: 0
+        });
+      });
+      </script>
+       
+      <style>
+       .entities {
+             line-height: 2; 
+             font-size: 1.2em;
+        }
+
+        [data-entity] {
+             padding: 0.25em 0.35em;
+             margin: 0px 0.25em;
+             line-height: 1;
+             display: inline-block;
+             border-radius: 0.25em;
+             border: 1px solid; 
+        }
+
+        [data-entity]::after {
+             box-sizing: border-box;
+             content: attr(data-entity);
+             font-size: 0.6em;
+             line-height: 1;
+             padding: 0.35em;
+             border-radius: 0.35em;
+             text-transform: uppercase;
+             display: inline-block;
+             vertical-align: middle;
+             margin: 0px 0px 0.1rem 0.5rem; 
+        }
+
+        [data-entity][data-entity="machine learning"] {
+             background: rgba(166, 226, 45, 0.2);
+             border-color: rgb(166, 226, 45); 
+        }
+
+      </style>
+   
+   </head>
+   <body>
+   <nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Named Entity Recognition</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="{{ url_for('main_page') }}">Upload New Data</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+   
+      <div class="container">
+        &nbsp;&nbsp; 
+      </div>
+       
+      <div class="container">
+      <p class="flow-text">Train a Named Entity Recognizer</p>
+
+      <div class="entities">"Thanks heaps!! I know that<mark data-entity="machine learning">neural nets</mark>use activation functions,   but where do distribution functions play into deep neural networks?"</div>
+      </div>
+       
+      <div class="container">
+        &nbsp;&nbsp; 
+      </div>
+      
+  
+   <div class="container"> 
+      <p class="flow-text">Test your models</p>
+      <form action="{{ url_for('test') }}" method='POST' class = "col s10">
+          <label>Select Trained Model</label>
+          <div class = "input-field col s12">
+              <select required name='model'>
+                  <option value="" disabled selected>Choose your model</option>
+                  {% for o in models %}
+                  <option value="{{ o }}" SELECTED>{{ o }}</option>
+                  {% endfor %}
+              </select>
+           </div>  
+          
+          
+          
+        <div class="input-field">
+          <label>Enter text</label>
+          <input id = "field" name="query" type="search">
+          <input id="submit" name="field" type="submit" style="visibility: hidden;" />
+          <label class="label-icon" for="search"></label>
+        </div>
+      </form>
+       
+      {% block body %}
+       
+       {% if results %}
+       
+       {{results|safe}}
+       
+       {% endif %}
+       
+      {% endblock %}
+     </div>
+      
+   <div class="container"> 
+
+  </div>
+
+       
+   </body>   
+</html>
