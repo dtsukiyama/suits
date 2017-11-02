@@ -1,0 +1,7 @@
+logistic regression,
+linear regression,
+support vector machine,
+neural nets,
+deep learning,
+random forests,
+naive bayes

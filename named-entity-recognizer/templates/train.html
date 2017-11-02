@@ -1,0 +1,166 @@
+<html>
+   <head>
+      <title>NER</title>
+      <meta name = "viewport" content = "width = device-width, initial-scale = 1">      
+      <link rel = "stylesheet"
+         href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+      <link rel = "stylesheet"
+         href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+      <script type = "text/javascript"
+         src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js">
+      </script> 
+      
+      <script>
+         $(document).ready(function() {
+            $('select').material_select();
+         });
+      </script>
+       
+      <script>
+        $(document).ready(function() {
+        $('select').material_select();
+
+        // for HTML5 "required" attribute
+        $("select[required]").css({
+          display: "inline",
+          height: 0,
+          padding: 0,
+          width: 0
+        });
+      });
+      </script>
+
+       
+      <style>
+       .entities {
+             line-height: 2; 
+             font-size: 1.2em;
+        }
+
+        [data-entity] {
+             padding: 0.25em 0.35em;
+             margin: 0px 0.25em;
+             line-height: 1;
+             display: inline-block;
+             border-radius: 0.25em;
+             border: 1px solid; 
+        }
+
+        [data-entity]::after {
+             box-sizing: border-box;
+             content: attr(data-entity);
+             font-size: 0.6em;
+             line-height: 1;
+             padding: 0.35em;
+             border-radius: 0.35em;
+             text-transform: uppercase;
+             display: inline-block;
+             vertical-align: middle;
+             margin: 0px 0px 0.1rem 0.5rem; 
+        }
+
+        [data-entity][data-entity="machine learning"] {
+             background: rgba(166, 226, 45, 0.2);
+             border-color: rgb(166, 226, 45); 
+        }
+        
+      </style>
+   
+   </head>
+   <body>
+   <nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Named Entity Recognition</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="{{ url_for('main_page') }}">Upload New Data</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+   
+      <div class="container">
+        &nbsp;&nbsp; 
+      </div>
+       
+      <div class="container">
+      <p class="flow-text">Train a Named Entity Recognizer</p>
+
+      <div class="entities">"Thanks heaps!! I know that<mark data-entity="machine learning">neural nets</mark>use activation functions,   but where do distribution functions play into deep neural networks?"</div>
+      </div>
+       
+      <div class="container">
+        &nbsp;&nbsp; 
+      </div>
+    
+   <div class="container"> 
+       
+      <form action="{{ url_for('train') }}" method='POST' enctype=multipart/form-data class = "col s10">
+         <div class = "row"> 
+         <p class="flow-text">Select data to train on</p>
+          <div class = "input-field col s12">
+              <select required name='data-index'>
+                  <option value="" disabled selected>Choose your datasets</option>
+                  {% for o in menu %}
+                  <option value="{{ o }}" SELECTED>{{ o }}</option> 
+                  {% endfor %}
+              </select>
+           </div>  
+          </div>
+          
+         <div class = "row"> 
+             <p class="flow-text">Name your entity type</p>
+             <div class= "input-field col s12">
+              <input placeholder="Example: PERSON" id="entity_name" type="text" name = "entity" class="validate">
+             </div>
+         </div>
+          
+          <div class = "row">
+              <p class="flow-text">How many samples per entity do you want to train on?</p>
+               <div class="input-field col s12 m4">
+                  <input type="number" name="Number" value="this is not number" class="validate"/>
+                  <label for="Number">Number of samples</label>
+               </div>   
+          </div>
+          
+          <div class = "row">
+              <p class="flow-text">How many iterations do you want to train on?</p>
+               <div class="input-field col s12 m4">
+                  <input type="number" name="iterations" value="this is not number" class="validate" required="" aria-required="true"/>
+                  <label for="Number">Number of iterations</label>
+               </div>   
+          </div>
+            
+          <div class = "row">
+
+              
+          <p class="flow-text">Upload your terms</p>
+          <div class="file-field input-field">
+              <div class="waves-effect waves-light btn-large light-blue lighten-1">
+                 <span>Terms</span>
+                   <input type="file" name="terms">
+              </div>
+              <div class="file-path-wrapper">
+                 <input class="file-path validate" type="text">
+              </div>
+                    
+       <button class="waves-effect waves-light btn-large light-blue lighten-1" type="submit" value='submit' onclick="Materialize.toast('NER training', 50000000)">Train
+             <i class="material-icons right">send</i>
+       </button>   
+                    
+              </div>
+          </div>
+      </form>
+      
+         
+       
+   <div class="row">
+      {% block body %}
+      {% endblock %}
+  </div>
+      
+   </div>
+   </body>   
+</html>
